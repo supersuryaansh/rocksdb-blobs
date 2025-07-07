@@ -2,7 +2,7 @@ const RW = require('read-write-mutexify')
 const spec = require('./spec/db')
 const HyperDB = require('hyperdb')
 const b4a = require('b4a')
-const { WriteStream } = require('./lib/streams')
+const { WriteStream, ReadStream } = require('./lib/streams')
 
 module.exports = class RocksBlobs {
   constructor (storage) {
@@ -80,7 +80,7 @@ module.exports = class RocksBlobs {
     return WriteStream(this.db)
   }
 
-  createReadStream () {
-    // return new ReadStream()
+  createReadStream (id) {
+    return ReadStream(this.db, id)
   }
 }
